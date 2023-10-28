@@ -1,13 +1,10 @@
-// @ts-expect-error avoid lint error
-import { defineTransformer } from '@nuxt/content/transformers'
-
-export default defineTransformer({
-    name: 'nuxt-gpt-content-transformer',
-    extensions: ['.md'],
-    parse(_id: string, rawContent: string) {
-        return {
-            _id,
-            body: rawContent.replaceAll('$', '#')
+export default defineNitroPlugin((nitroApp) => {
+    console.log('nitro plugin')
+    // @ts-ignore
+    nitroApp.hooks.hook('content:file:beforeParse', (file) => {
+        console.log('Processing content')
+        if (file._id.endsWith('.md')) {
+            file.body = file.body.replaceAll('$', '#');
         }
-    }
+    })
 })

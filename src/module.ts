@@ -29,13 +29,29 @@ export default defineNuxtModule<ModuleOptions>({
     // // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
     // const plugin = addPlugin(resolver.resolve('./build/transformer'))
 
-    nuxt.options.nitro.externals = nuxt.options.nitro.externals || {}
-    nuxt.options.nitro.externals.inline = nuxt.options.nitro.externals.inline || []
-    nuxt.options.nitro.externals.inline.push(resolve('./module'))
+    // nuxt.options.nitro.externals = nuxt.options.nitro.externals || {}
+    // nuxt.options.nitro.externals.inline = nuxt.options.nitro.externals.inline || []
+    // nuxt.options.nitro.externals.inline.push(resolve('./module'))
     // @ts-ignore
-    nuxt.hook('content:context', (contentContext) => {
-      console.log('hook!')
-      contentContext.transformers.push(resolver.resolve('./build/transformer'))
+    // nuxt.hook('content:file:beforeParse', (contentContext) => {
+    //   console.log('hook!')
+    // })
+
+    nuxt.hook('nitro:config', async (nitroConfig) => {
+
+      console.log('pushing into plugins: ', resolver.resolve('./build/transformer'))
+      nitroConfig.plugins = nitroConfig.plugins ?? []
+      nitroConfig.plugins?.push(resolver.resolve('./build/transformer'))
+      console.log(nitroConfig.plugins)
+
+
+      // @ts-ignore
+      // nitro.hooks.hook('content:file:beforeParse', (file) => {
+      //   console.log('Processing content hook')
+      //   if (file._id.endsWith('.md')) {
+      //     file.body = file.body.replaceAll('$', '#');
+      //   }
+      // })
     })
   }
 })
