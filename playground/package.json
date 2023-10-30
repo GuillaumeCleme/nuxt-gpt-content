@@ -3,7 +3,7 @@
   "name": "nuxt-gpt-content-playground",
   "type": "module",
   "scripts": {
-    "dev": "nuxi dev",
+    "dev": "nuxi dev --dotenv .env.local",
     "build": "nuxi build",
     "generate": "nuxi generate"
   },
