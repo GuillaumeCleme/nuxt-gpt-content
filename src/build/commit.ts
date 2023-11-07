@@ -8,10 +8,12 @@ export function commitHook(options: ModuleOptions){
         throw new Error(`Could not find 'git', is it installed? Error: ${error}`);
     }
 
+    const commitOptions = typeof options.commitHook == "object" ? options.commitHook : undefined;
+
     executeCommand('git add .')
-    executeCommand('git config user.name "Nuxt Content"')
-    executeCommand('git config user.email "no-reply@nuxt.com"')
-    executeCommand('git commit -m "Adding content changes"')
+    executeCommand('git config user.name "' + commitOptions?.commitAuthorName ?? 'Nuxt GPT Content' + '"')
+    executeCommand('git config user.email "' + commitOptions?.commitAuthorEmail ?? 'no-reply@nuxt.com' + '"')
+    executeCommand('git commit -m "' + commitOptions?.commitMessage ?? 'Adding content changes' + '"')
     executeCommand('git push')
 }
 

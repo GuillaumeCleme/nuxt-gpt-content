@@ -1,3 +1,4 @@
+import { ModuleOptions } from "~/src/module";
 import { ModelResults } from ".";
 import OpenAI from 'openai';
 
@@ -6,7 +7,7 @@ const openai = new OpenAI({
     apiKey: process.env.NUXT_OPENAI_API_KEY
 });
 
-export default async function (message: string): Promise<ModelResults> {
+export default async function (message: string, config: ModuleOptions): Promise<ModelResults> {
 
     const chatCompletion = await openai.chat.completions.create({
         messages: [{ role: 'user', content: message }],
