@@ -1,9 +1,11 @@
-import { ModelResults } from ".";
+import { Model, ModelResults } from ".";
 
-export default function (message: string): ModelResults {
-    return {
-        results: [
-            'This content came form a local stub model'
-        ]
+export default class LocalStub implements Model {
+    generateContent(message: string): ModelResults {
+        return {
+            results: [
+                `This content came form a local stub model. Received: ${message}`
+            ]
+        }
     }
 }

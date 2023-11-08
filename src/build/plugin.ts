@@ -1,8 +1,9 @@
 import fs from 'fs';
 import { parseMarkdown } from '@nuxtjs/mdc/dist/runtime'
-import localstub from './models/localstub';
 import { ModuleOptions } from '../module';
-import openai from './models/openai';
+
+import OpenAIModel from './models/openai';
+import LocalStub from './models/localstub';
 
 export default defineNitroPlugin((nitroApp) => {
 
@@ -30,10 +31,10 @@ export default defineNitroPlugin((nitroApp) => {
                 let results;
                 switch (config?.contentModelProvider) {
                     case 'openai':
-                        results = await openai(lookup, config);
+                        results = await new OpenAIModel(config).generateContent(lookup);
                         break;
                     default:
-                        results = localstub(lookup);
+                        results = new LocalStub().generateContent(lookup);
                         break;
                 }
     
