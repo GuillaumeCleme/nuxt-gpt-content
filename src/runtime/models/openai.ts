@@ -1,4 +1,4 @@
-import { ModuleOptions } from "~/src/module";
+import { ModuleOptions } from "../../module";
 import { ModelResults, Model } from ".";
 import OpenAI from 'openai';
 
@@ -20,9 +20,7 @@ export default class OpenAIModel implements Model {
         const chatCompletion = await openai.chat.completions.create({
             messages: [{ role: 'user', content: message }],
             model: this.config.contentModelName,
-            temperature: 0.8,
-            n: 1,
-            max_tokens: 250
+            ...this.config.contentModelOptions
         });
     
         if(!chatCompletion.choices[0].message.content){

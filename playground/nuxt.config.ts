@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     '@nuxt/content'
   ],
   gptcontent: {
-
+    contentModelProvider: 'none'
   },
   devtools: { enabled: true }
 })

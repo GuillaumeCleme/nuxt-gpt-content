@@ -2,6 +2,9 @@ import fs from 'fs';
 import { parseMarkdown } from '@nuxtjs/mdc/dist/runtime'
 import { ModuleOptions } from '../module';
 
+import { defineNitroPlugin } from 'nitropack/dist/runtime/plugin'
+import { useRuntimeConfig } from '#imports'
+
 import OpenAIModel from './models/openai';
 import LocalStub from './models/localstub';
 
@@ -10,6 +13,7 @@ export default defineNitroPlugin((nitroApp) => {
     // @ts-ignore
     nitroApp.hooks.hook('content:file:beforeParse', async (file: {_id: string, body: string}, event) => {
 
+        // @ts-ignore
         const config = useRuntimeConfig(event)?.gptcontent as ModuleOptions | undefined;
 
         let parsedContent, matches;

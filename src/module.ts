@@ -1,10 +1,12 @@
 import { defineNuxtModule, createResolver } from '@nuxt/kit'
-import { commitHook } from './build/commit'
+import { commitHook } from './runtime/commit'
+
 
 // Module options TypeScript interface definition
 export interface ModuleOptions {
     contentModelProvider: string
     contentModelName: string
+    contentModelOptions?: Record<string, any>,
     commitHook: boolean | {
         commitAuthorEmail?: string,
         commitAuthorName?: string,
@@ -31,8 +33,13 @@ export default defineNuxtModule<ModuleOptions>({
     defaults: {
         contentModelProvider: 'openai',
         contentModelName: 'gpt-3.5-turbo',
+        contentModelOptions: {
+            temperature: 0.8,
+            n: 1,
+            max_tokens: 250
+        },
         commitHook: true,
-        saveContent: true
+        saveContent: false
     },
     setup(options, nuxt) {
         const resolver = createResolver(import.meta.url)
@@ -40,7 +47,7 @@ export default defineNuxtModule<ModuleOptions>({
         //Inject Nitro Plugin
         nuxt.hook('nitro:config', async (nitroConfig) => {
             nitroConfig.plugins = nitroConfig.plugins ?? []
-            nitroConfig.plugins?.push(resolver.resolve('./build/plugin'))
+            nitroConfig.plugins?.push(resolver.resolve('./runtime/plugin'))
 
             nitroConfig.runtimeConfig = nitroConfig.runtimeConfig ?? {}
             nitroConfig.runtimeConfig.gptcontent = nitroConfig.runtimeConfig.gptcontent ?? options
