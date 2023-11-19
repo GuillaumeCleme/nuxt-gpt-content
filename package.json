@@ -1,6 +1,6 @@
 {
-  "name": "nuxt-gpt-content",
-  "version": "1.0.0",
+  "name": "@guillaumecle.me/nuxt-gpt-content",
+  "version": "0.1.0",
   "description": "A Nuxt Content module to generate content with OpenAI's GPT.",
   "repository": "guillaumecleme/nuxt-gpt-content",
   "license": "MIT",

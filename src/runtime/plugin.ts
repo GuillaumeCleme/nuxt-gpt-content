@@ -16,6 +16,11 @@ export default defineNitroPlugin((nitroApp) => {
         // @ts-ignore
         const config = useRuntimeConfig(event)?.gptcontent as ModuleOptions | undefined;
 
+        //Return if not active
+        if(!config?.active){
+            return;
+        }
+
         let parsedContent, matches;
         if(file._id.endsWith('.md')){
             //Front-matter keys

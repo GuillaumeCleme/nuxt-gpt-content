@@ -4,15 +4,16 @@ import { commitHook } from './runtime/commit'
 
 // Module options TypeScript interface definition
 export interface ModuleOptions {
-    contentModelProvider: string
-    contentModelName: string
+    contentModelProvider: "openai" | "none"
+    contentModelName: "gpt-3.5-turbo-1106" | "gpt-3.5-turbo" | "gpt-4" | "gpt-4-32k" | string
     contentModelOptions?: Record<string, any>,
     commitHook: boolean | {
         commitAuthorEmail?: string,
         commitAuthorName?: string,
         commitMessage?: string,
     }
-    saveContent: boolean
+    saveContent: boolean,
+    active: boolean
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -31,6 +32,7 @@ export default defineNuxtModule<ModuleOptions>({
     // },
     // Default configuration options of the Nuxt module
     defaults: {
+        active: true,
         contentModelProvider: 'openai',
         contentModelName: 'gpt-3.5-turbo',
         contentModelOptions: {
