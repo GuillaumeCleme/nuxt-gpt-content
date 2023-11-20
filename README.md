@@ -1,12 +1,3 @@
-<!--
-Get your module up and running quickly.
-
-Find and replace all on all files (CMD+SHIFT+F):
-- Name: My Module
-- Package name: nuxt-gpt-content
-- Description: My new Nuxt module
--->
-
 # Nuxt GPT Content
 
 [![npm version][npm-version-src]][npm-version-href]
@@ -101,6 +92,10 @@ npm run test:watch
 # Release new version
 npm run release
 ```
+
+## License
+
+[MIT License](https://github.com/GuillaumeCleme/nuxt-gpt-content/LICENSE)
 
 <!-- Badges -->
 [npm-version-src]: https://img.shields.io/npm/v/nuxt-gpt-content/latest.svg?style=flat&colorA=18181B&colorB=28CF8D
