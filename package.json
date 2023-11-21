@@ -1,10 +1,10 @@
 {
   "name": "nuxt-gpt-content",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A Nuxt Content module to generate content with GPT models such as OpenAI.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GuillaumeCleme/nuxt-gpt-content.git"
+    "url": "git+https://github.com/GuillaumeCleme/nuxt-gpt-content.git"
   },
   "license": "MIT",
   "type": "module",
