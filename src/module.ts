@@ -1,4 +1,4 @@
-import { defineNuxtModule, createResolver } from '@nuxt/kit'
+import { defineNuxtModule, createResolver, useLogger } from '@nuxt/kit'
 import { commitHook } from './runtime/commit'
 
 
@@ -44,6 +44,7 @@ export default defineNuxtModule<ModuleOptions>({
         saveContent: false
     },
     setup(options, nuxt) {
+        const logger = useLogger('nuxt-gpt-content')
         const resolver = createResolver(import.meta.url)
 
         //Inject Nitro Plugin
@@ -53,12 +54,17 @@ export default defineNuxtModule<ModuleOptions>({
 
             nitroConfig.runtimeConfig = nitroConfig.runtimeConfig ?? {}
             nitroConfig.runtimeConfig.gptcontent = nitroConfig.runtimeConfig.gptcontent ?? options
+            nitroConfig.runtimeConfig.moduleLogger = logger;
         })
 
         //Register commit hook
         nuxt.hook('close', async () => {
             if (nuxt.options.ssr && nuxt.options._generate && options.commitHook) {
-                commitHook(options);
+                logger.info('Running commit hook');
+                commitHook(options, logger);
+            }
+            else{
+                logger.info('Commit hook skipped');
             }
         })
     }
