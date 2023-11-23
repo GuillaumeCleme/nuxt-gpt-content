@@ -8,7 +8,7 @@ import { useRuntimeConfig } from '#imports'
 import OpenAIModel from './models/openai';
 import LocalStub from './models/localstub';
 
-import { ConsolaInstance } from 'consola'
+import { useLogger } from '@nuxt/kit'
 
 export default defineNitroPlugin((nitroApp) => {
 
@@ -17,9 +17,7 @@ export default defineNitroPlugin((nitroApp) => {
 
         // @ts-ignore
         const config = useRuntimeConfig(event)?.gptcontent as ModuleOptions | undefined;
-        
-        // @ts-ignore
-        const logger = useRuntimeConfig(event)?.moduleLogger as ConsolaInstance;
+        const logger = useLogger('nuxt-gpt-content');
 
         //Return if not active
         if(!config?.active){

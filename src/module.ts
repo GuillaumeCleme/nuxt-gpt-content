@@ -54,14 +54,13 @@ export default defineNuxtModule<ModuleOptions>({
 
             nitroConfig.runtimeConfig = nitroConfig.runtimeConfig ?? {}
             nitroConfig.runtimeConfig.gptcontent = nitroConfig.runtimeConfig.gptcontent ?? options
-            nitroConfig.runtimeConfig.moduleLogger = logger;
         })
 
         //Register commit hook
         nuxt.hook('close', async () => {
             if (nuxt.options.ssr && nuxt.options._generate && options.commitHook) {
                 logger.info('Running commit hook');
-                commitHook(options, logger);
+                commitHook(options);
             }
             else{
                 logger.info('Commit hook skipped');
