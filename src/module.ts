@@ -26,12 +26,6 @@ export default defineNuxtModule<ModuleOptions>({
             nuxt: '^3.0.0'
         },
     },
-    // hooks: {
-    //   'app:error': (err) => {
-    //     console.info(`This error happened: ${err}`);
-    //   }
-    // },
-    // Default configuration options of the Nuxt module
     defaults: {
         active: true,
         contentModelProvider: 'openai',

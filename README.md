@@ -50,22 +50,23 @@ That's it! You can now use My Module in your Nuxt app ✨
 
 1. Add a `gpt-content` configuration object to your `nuxt.config.ts` file
 
-```js
-export default defineNuxtConfig({
-  gptcontent: {
-    active: true, //True by default but can be turned off
-    contentModelProvider: 'openai', //`openai` or `none` for testing
-    contentModelName: 'gpt-3.5-turbo', //Any supported OpenAI model name
-    contentModelOptions: { //Any supported parameters to pass to the model config
-        temperature: 0.8,
-        n: 1,
-        max_tokens: 250
+    ```js
+    export default defineNuxtConfig({
+    gptcontent: {
+        active: true, //True by default but can be turned off
+        contentModelProvider: 'openai', //`openai` or `none` for testing
+        contentModelName: 'gpt-3.5-turbo', //Any supported OpenAI model name
+        contentModelOptions: { //Any supported parameters to pass to the model config
+            temperature: 0.8,
+            n: 1,
+            max_tokens: 250
+        },
+        commitHook: true, //Boolean or object containing commit details. Used to verify if a commit hook run after content files have been modified.
+        saveContent: false //Should content files be updated and saved locally?
     },
-    commitHook: true, //Boolean or object containing commit details. Used to verify if a commit hook run after content files have been modified.
-    saveContent: false //Should content files be updated and saved locally?
-  },
-})
-```
+    })
+    ```
+1. Ensure a you set an environment variable named `NUXT_OPENAI_API_KEY` with the value of you OpenAI API key.
 
 ## Development
 
