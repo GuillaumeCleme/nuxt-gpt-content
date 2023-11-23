@@ -8,6 +8,8 @@ import { useRuntimeConfig } from '#imports'
 import OpenAIModel from './models/openai';
 import LocalStub from './models/localstub';
 
+import { useLogger } from '@nuxt/kit'
+
 export default defineNitroPlugin((nitroApp) => {
 
     // @ts-ignore
@@ -15,9 +17,11 @@ export default defineNitroPlugin((nitroApp) => {
 
         // @ts-ignore
         const config = useRuntimeConfig(event)?.gptcontent as ModuleOptions | undefined;
+        const logger = useLogger('nuxt-gpt-content');
 
         //Return if not active
         if(!config?.active){
+            logger.warn('Plugin set to inactive, skipping');
             return;
         }
 
@@ -30,7 +34,7 @@ export default defineNitroPlugin((nitroApp) => {
         else{
             //Plain keys e.g. ${gpt_content=Write me a prompt}
             //matches = file.body.match(/\${gpt_[_\w-]*\=.*}/) ?? [];
-            console.warn('Only markdown files are supported in this version')
+            logger.warn('Only markdown files are supported in this version')
         }
 
         if(matches && parsedContent){
@@ -38,6 +42,7 @@ export default defineNitroPlugin((nitroApp) => {
                 const lookup = parsedContent.data[unwrapVariable(match)]
 
                 let results;
+                logger.info(`Invoking model: ${config?.contentModelProvider}`);
                 switch (config?.contentModelProvider) {
                     case 'openai':
                         results = await new OpenAIModel(config).generateContent(lookup);
@@ -48,13 +53,17 @@ export default defineNitroPlugin((nitroApp) => {
                 }
     
                 if(!results.results){
-                    console.error("Could not get content from model: " + results.error);
+                    logger.error("Could not get content from model: " + results.error);
                 }
                 else{
                     file.body = file.body.replaceAll(match, results.results[0]);
 
                     if(config?.saveContent){
+                        logger.info('Saving file content');
                         fs.writeFileSync(getFilePath(file), file.body);
+                    }
+                    else{
+                        logger.info('Skipping file save');
                     }
                 }
             }
