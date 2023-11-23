@@ -11,6 +11,7 @@ export interface ModuleOptions {
         commitAuthorEmail?: string,
         commitAuthorName?: string,
         commitMessage?: string,
+        push?: boolean
     }
     saveContent: boolean,
     active: boolean

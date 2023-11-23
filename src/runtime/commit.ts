@@ -13,10 +13,13 @@ export function commitHook(options: ModuleOptions){
     const commitOptions = typeof options.commitHook == "object" ? options.commitHook : {};
 
     executeCommand('git add .')
-    executeCommand('git config user.name "' + commitOptions.commitAuthorName ?? 'Nuxt GPT Content' + '"')
-    executeCommand('git config user.email "' + commitOptions.commitAuthorEmail ?? 'no-reply@nuxt.com' + '"')
-    executeCommand('git commit -m "' + commitOptions.commitMessage ?? 'Adding content changes' + '"')
-    executeCommand('git push')
+    executeCommand(`git config user.name "${commitOptions.commitAuthorName ?? 'Nuxt GPT Content'}"`)
+    executeCommand(`git config user.email "${commitOptions.commitAuthorEmail ?? 'no-reply@nuxt.com'}"`)
+    executeCommand(`git commit -m "${commitOptions.commitMessage ?? 'Adding content changes'}"`)
+
+    if(commitOptions.push){
+        executeCommand('git push')
+    }
 }
 
 function executeCommand(command: string){
