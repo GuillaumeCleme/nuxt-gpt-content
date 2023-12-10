@@ -53,7 +53,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         //Register commit hook
         nuxt.hook('close', async () => {
-            if (nuxt.options.ssr && nuxt.options._generate && options.commitHook) {
+            if (options.commitHook) {
                 logger.info('Running commit hook');
                 commitHook(options);
             }

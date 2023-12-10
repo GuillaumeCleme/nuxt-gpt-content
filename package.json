@@ -1,6 +1,6 @@
 {
   "name": "nuxt-gpt-content",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A Nuxt Content module to generate content with GPT models such as OpenAI.",
   "repository": {
     "type": "git",
