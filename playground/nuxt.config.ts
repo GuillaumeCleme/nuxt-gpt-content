@@ -4,7 +4,10 @@ export default defineNuxtConfig({
     '@nuxt/content'
   ],
   gptcontent: {
-    contentModelProvider: 'none'
+    contentModelProvider: 'none',
+    contentModelSystemPrompt: './content/_system-prompt.md',
+    saveContent: false,
+    commitHook: false
   },
   devtools: { enabled: true }
 })

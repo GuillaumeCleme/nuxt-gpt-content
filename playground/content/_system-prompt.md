@@ -1,0 +1,1 @@
+A system prompt to be provided to a content model.
