@@ -7,6 +7,7 @@ export interface ModuleOptions {
     contentModelProvider: "openai" | "none"
     contentModelName: "gpt-3.5-turbo-1106" | "gpt-3.5-turbo" | "gpt-4" | "gpt-4-32k" | string
     contentModelOptions?: Record<string, any>,
+    contentModelSystemPrompt?: string,
     commitHook: boolean | {
         commitAuthorEmail?: string,
         commitAuthorName?: string,
@@ -33,7 +34,7 @@ export default defineNuxtModule<ModuleOptions>({
         contentModelOptions: {
             temperature: 0.8,
             n: 1,
-            max_tokens: 250
+            max_tokens: 250,
         },
         commitHook: true,
         saveContent: false

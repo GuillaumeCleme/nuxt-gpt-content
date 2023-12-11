@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.0] - 2023-12-10
+ 
+### Added
+- Support for system prompts that help provide content to content models
+### Changed
+- N/A
+### Fixed
+- N/A
+
 ## [0.3.1] - 2023-12-10
  
 ### Added

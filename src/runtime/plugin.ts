@@ -48,7 +48,7 @@ export default defineNitroPlugin((nitroApp) => {
                         results = await new OpenAIModel(config).generateContent(lookup);
                         break;
                     default:
-                        results = new LocalStub().generateContent(lookup);
+                        results = new LocalStub(config).generateContent(lookup);
                         break;
                 }
     
